@@ -50,7 +50,7 @@ gadi {
 ## Run the plugin
 There are two methods to run the Nextflow pipeline with the plugin
 ### nextflow.config
-Add the plugin to the configuration file 
+Add the plugin to the top-level `nextflow.config` file. If it is defined in an imported config file such as `conf/gadi.config`, it will error.
 ```
 plugins {
     id 'nf-gadi@1.2.0'
