@@ -47,6 +47,21 @@ gadi {
     output = 'report.csv'
 }
 ```
+
+Alternatively, to generate separate reports each time the pipeline is run,
+you can add a timestamp parameter and use that in your output file name.
+
+```
+params {
+	timestamp = new java.util.Date().format( 'yyyy-MM-dd_HH-mm-ss')
+}
+
+gadi {
+    format = 'csv'
+    output = "report_{params.timestamp}.csv"
+}
+```
+
 ## Run the plugin
 There are two methods to run the Nextflow pipeline with the plugin
 ### nextflow.config
