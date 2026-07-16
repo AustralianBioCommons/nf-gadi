@@ -58,7 +58,7 @@ params {
 
 gadi {
     format = 'csv'
-    output = "report_{params.timestamp}.csv"
+    output = "report_${params.timestamp}.csv"
 }
 ```
 
