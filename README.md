@@ -21,7 +21,7 @@ If you are using Nextflow < 25.10 and cannot download the latest version, add an
 ```
 module load nextflow/24.04.1 
 
-export NXF_PLUGINS_TEST_REPOSITORY="https://raw.githubusercontent.com/nextflow-io/plugins/ae0dc81429fbab18b1f98c6421c7ce5d92f71253/plugins.json"
+export NXF_PLUGINS_TEST_REPOSITORY="https://raw.githubusercontent.com/nextflow-io/plugins/89219232d287c59954dc17425a5c0c655a98cb6b/plugins.json"
 
 nextflow plugin install nf-gadi@1.3.0 
 ```
