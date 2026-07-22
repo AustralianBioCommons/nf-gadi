@@ -12,7 +12,7 @@ Start from v1.1.0, this plugin can be download from [Nextflow plugin registry](h
 
 ```
 module load nextflow/25.10.3
-nextflow plugin install nf-gadi@1.2.0   
+nextflow plugin install nf-gadi@1.3.0   
 ```
 
 We recommend to download the plugin before running the workflow. 
@@ -23,7 +23,7 @@ module load nextflow/24.04.1
 
 export NXF_PLUGINS_TEST_REPOSITORY="https://raw.githubusercontent.com/nextflow-io/plugins/ae0dc81429fbab18b1f98c6421c7ce5d92f71253/plugins.json"
 
-nextflow plugin install nf-gadi@1.2.0 
+nextflow plugin install nf-gadi@1.3.0 
 ```
 
 ### Install from repository
@@ -62,13 +62,27 @@ gadi {
 }
 ```
 
+### Optional: Publishing the report to an external location
+
+By default, the usage report is written only to the path set in `output`.
+
+Optionally, set `publishTo` to have the finished report copied to an external location once the workflow completes — anything Nextflow can resolve as a `Path`, such as `s3://`, `gs://`, or `az://`, given the relevant credentials/plugin are configured.
+
+```
+gadi {
+    format    = 'csv'
+    output    = "report.csv"
+    publishTo = "s3://bucket/results/UsageReport.csv"
+}
+```
+
 ## Run the plugin
 There are two methods to run the Nextflow pipeline with the plugin
 ### nextflow.config
 Add the plugin to the configuration file
 ```
 plugins {
-    id 'nf-gadi@1.2.0'
+    id 'nf-gadi@1.3.0'
 }
 ```
 Then run the Nextflow pipeline with `nextflow run main.nf`
@@ -76,5 +90,5 @@ Then run the Nextflow pipeline with `nextflow run main.nf`
 ### Nextflow command 
 Another method to run the plugin is by adding it to the Nextflow command 
 ``` 
-nextflow run main.nf -plugins nf-gadi@1.2.0
+nextflow run main.nf -plugins nf-gadi@1.3.0
 ```

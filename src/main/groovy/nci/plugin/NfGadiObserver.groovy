@@ -32,6 +32,7 @@ import java.util.concurrent.ConcurrentHashMap
 import groovy.json.JsonOutput
 import groovy.json.JsonSlurper
 import java.util.regex.Matcher
+import nextflow.file.FileHelper
 
 import static java.lang.Math.ceil
 
@@ -51,7 +52,9 @@ class NfGadiObserver implements TraceObserver {
     private String format = session.config.navigate('gadi.format', '')
     private String output = session.config.navigate('gadi.output', '')
     Path path = Paths.get(output) 
-    // private boolean cached = false
+
+    private String publishTo = session.config.navigate('gadi.publishTo', '')
+    
     private Map<String, List<String>> cachedCSV = [:]
     private Map<String, Map<String, String>> cachedJson = [:]
 
@@ -155,6 +158,12 @@ class NfGadiObserver implements TraceObserver {
         if(format == 'json'){
             Files.write(path, JsonOutput.prettyPrint(JsonOutput.toJson(results)).bytes)
         }      
+
+        if (!publishTo.isEmpty()) {
+            Path dest = FileHelper.asPath(publishTo) as Path
+            Files.copy(path, dest, StandardCopyOption.REPLACE_EXISTING)
+            log.info "Usage report published to $dest"
+        }
 
         log.info "Pipeline complete! 👋"
     }
