@@ -53,7 +53,7 @@ class NfGadiObserver implements TraceObserver {
     private String output = session.config.navigate('gadi.output', '')
     Path path = Paths.get(output) 
 
-    private String publishTo = session.config.navigate('gadi.publishTo', '')
+    private Object publishTo = session.config.navigate('gadi.publishTo', '')
     
     private Map<String, List<String>> cachedCSV = [:]
     private Map<String, Map<String, String>> cachedJson = [:]
@@ -121,6 +121,20 @@ class NfGadiObserver implements TraceObserver {
         }
     }
 
+    private String resolvePublishTo(Object raw) {
+        if (raw == null) return null
+
+        Object value = raw
+        if (value instanceof Closure) {
+            value = value.call()
+        }
+
+        if (value == null) return null
+
+        String result = value.toString().trim()
+        return result.isEmpty() ? null : result
+    }
+
     @Override
     void onFlowCreate(Session session) {
         println "Pipeline is starting! 🚀"
@@ -159,10 +173,16 @@ class NfGadiObserver implements TraceObserver {
             Files.write(path, JsonOutput.prettyPrint(JsonOutput.toJson(results)).bytes)
         }      
 
-        if (!publishTo.isEmpty()) {
-            Path dest = FileHelper.asPath(publishTo) as Path
-            Files.copy(path, dest, StandardCopyOption.REPLACE_EXISTING)
-            log.info "Usage report published to $dest"
+        String resolvedPublishTo = resolvePublishTo(publishTo)
+
+        if (resolvedPublishTo) {
+            try {
+                Path dest = FileHelper.asPath(resolvedPublishTo) as Path
+                Files.copy(path, dest, StandardCopyOption.REPLACE_EXISTING)
+                log.info "Usage report published to $dest"
+            } catch (Exception e) {
+                log.warn "Failed to publish usage report to '$resolvedPublishTo': ${e.message}"
+            }
         }
 
         log.info "Pipeline complete! 👋"

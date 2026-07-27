@@ -12,7 +12,7 @@ Start from v1.1.0, this plugin can be download from [Nextflow plugin registry](h
 
 ```
 module load nextflow/25.10.3
-nextflow plugin install nf-gadi@1.3.0   
+nextflow plugin install nf-gadi@1.3.1   
 ```
 
 We recommend to download the plugin before running the workflow. 
@@ -21,9 +21,9 @@ If you are using Nextflow < 25.10 and cannot download the latest version, add an
 ```
 module load nextflow/24.04.1 
 
-export NXF_PLUGINS_TEST_REPOSITORY="https://raw.githubusercontent.com/nextflow-io/plugins/89219232d287c59954dc17425a5c0c655a98cb6b/plugins.json"
+export NXF_PLUGINS_TEST_REPOSITORY="https://raw.githubusercontent.com/nextflow-io/plugins/7e1c884584176121c5da63b5d37b0af2cc58f9b2/plugins.json"
 
-nextflow plugin install nf-gadi@1.3.0 
+nextflow plugin install nf-gadi@1.3.1 
 ```
 
 ### Install from repository
@@ -82,7 +82,7 @@ There are two methods to run the Nextflow pipeline with the plugin
 Add the plugin to the configuration file
 ```
 plugins {
-    id 'nf-gadi@1.3.0'
+    id 'nf-gadi@1.3.1'
 }
 ```
 Then run the Nextflow pipeline with `nextflow run main.nf`
@@ -90,5 +90,5 @@ Then run the Nextflow pipeline with `nextflow run main.nf`
 ### Nextflow command 
 Another method to run the plugin is by adding it to the Nextflow command 
 ``` 
-nextflow run main.nf -plugins nf-gadi@1.3.0
+nextflow run main.nf -plugins nf-gadi@1.3.1
 ```
