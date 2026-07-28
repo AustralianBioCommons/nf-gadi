@@ -11,7 +11,7 @@
 Start from v1.1.0, this plugin can be download from [Nextflow plugin registry](https://registry.nextflow.io/plugins/nf-gadi)
 
 ```
-module load nextflow/25.10.3
+module load nextflow/25.10.4
 nextflow plugin install nf-gadi@1.3.1   
 ```
 
