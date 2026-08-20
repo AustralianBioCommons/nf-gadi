@@ -3,6 +3,7 @@
 .idea
 .nextflow*
 gradle.properties
+CHANGELOG.template
 
 # Ignore Gradle build output directory
 build

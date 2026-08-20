@@ -223,7 +223,7 @@ class NfGadiObserver implements TraceObserver {
                 cpus = cpusMatcher.group(1)
             }
 
-            Matcher memoryMatcher = (line =~ /Memory Used:\s+(\d+\.\d+\wB)/)
+            Matcher memoryMatcher = (line =~ /(?<!GPU )Memory Used:\s+(\d+\.\d+\wB)/)
             if (memoryMatcher.find()) {
                 memory = memoryMatcher.group(1)
             }
