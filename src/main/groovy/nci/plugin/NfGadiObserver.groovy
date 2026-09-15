@@ -228,7 +228,7 @@ class NfGadiObserver implements TraceObserver {
                 memory = memoryMatcher.group(1)
             }
 
-            Matcher exitCodeMatcher = (line =~ /Exit Status:\s+(\d+)/)
+            Matcher exitCodeMatcher = (line =~ /Exit Status:\s+(-?\d+)/)
             if (exitCodeMatcher.find()) {
                 exitCode = exitCodeMatcher.group(1)
             }
